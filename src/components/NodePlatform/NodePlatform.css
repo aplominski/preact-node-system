@@ -1,0 +1,51 @@
+/* NodePlatform.css */
+
+.node-node-platform {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+}
+
+/* Canvas layer for edges */
+.node-node-platform-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Let clicks pass through empty areas */
+  width: 100%;
+  height: 100%;
+}
+
+.node-node-platform-canvas>* {
+  pointer-events: all;
+  /* Allow interaction with children (edges) */
+}
+
+/* Nodes layer */
+.node-node-platform-nodes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: all;
+}
+
+.node-node-platform-warning {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+  z-index: 100;
+  pointer-events: none;
+}

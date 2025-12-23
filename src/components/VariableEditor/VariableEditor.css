@@ -1,0 +1,646 @@
+.node-variable-editor {
+    font-size: 8px;
+    font-family: monospace;
+    padding: 0 2px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    min-width: 18px;
+    max-width: 28px;
+    height: 12px;
+    line-height: 10px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.node-variable-readonly {
+    font-family: monospace;
+    font-size: 11px;
+    color: #eaeaea;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 6px 8px;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    max-width: 360px;
+    overflow: auto;
+}
+
+.node-variable-editor-number {
+    /* Allow number pills to size to content but stay compact */
+    min-width: 18px;
+    width: auto;
+    max-width: 280px;
+    padding: 0 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* String editor pill: wider and single-line with ellipsis */
+.node-variable-editor-string {
+    min-width: 80px;
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 6px;
+    /* left align text in pill */
+    justify-content: flex-start;
+    padding-left: 6px;
+}
+
+/* Text element inside string pills (ensures ellipsis works reliably) */
+.node-variable-editor-string .node-variable-editor-string-text,
+.node-variable-editor-string-preview .node-variable-editor-string-text {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Compact preview for disabled string values (used on node outputs) */
+.node-variable-editor-string-preview {
+    min-width: 44px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 6px;
+    font-family: monospace;
+    font-size: 8px;
+    height: 14px;
+    line-height: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    color: #fff;
+}
+
+
+.node-variable-display {
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-variable-display:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+input.node-variable-editor {
+    width: 24px;
+    height: 12px;
+    padding: 0 1px;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+input.node-variable-editor::-webkit-outer-spin-button,
+input.node-variable-editor::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.node-variable-editor:focus {
+    outline: none;
+    border-color: #4a9eff;
+    background: rgba(74, 158, 255, 0.1);
+}
+
+.node-variable-editor-vec3 {
+    display: flex;
+    gap: 4px;
+    /* Increased gap slightly for separation */
+    align-items: center;
+}
+
+/* Generic variable editor pill used for numeric displays */
+.node-variable-editor-pill {
+    min-width: 18px;
+    width: auto;
+    max-width: 320px;
+    text-align: center;
+    padding: 0 6px;
+    font-family: monospace;
+    font-size: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    color: #fff;
+    height: auto;
+    line-height: 12px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.12s ease, border-color 0.12s ease, transform 0.06s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.node-variable-editor-pill:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: translateY(-1px);
+}
+
+/* Inputs inside popover should match color input styling */
+.node-variable-popover-input,
+.node-color-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    color: #fff;
+    padding: 4px 6px;
+    font-size: 11px;
+    font-family: monospace;
+    min-width: 40px;
+}
+
+.node-variable-popover-input:focus,
+.node-color-input:focus {
+    outline: none;
+    border-color: #4a9eff;
+}
+
+.node-variable-editor-vec3 input {
+    width: 28px;
+    text-align: center;
+    padding: 0 1px;
+    font-family: inherit;
+    font-size: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    color: #fff;
+    height: 12px;
+    line-height: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-variable-editor-vec3 .node-variable-editor-pill {
+    min-width: 18px;
+    width: auto;
+    max-width: 220px;
+    text-align: center;
+    padding: 0 6px;
+    font-family: inherit;
+    font-size: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    color: #fff;
+    height: auto;
+    line-height: 10px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.node-variable-editor-vec3 .node-variable-editor-pill {
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.node-variable-editor-vec3 .node-variable-editor-pill:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.node-variable-editor-vec3 input:focus {
+    outline: none;
+    border-color: #4a9eff;
+    background: rgba(74, 158, 255, 0.1);
+    z-index: 10;
+}
+
+/* Reuse image popover styles for variable popovers (small modification) */
+.node-image-popover {
+    position: fixed;
+    z-index: 10000;
+    background: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    min-width: 140px;
+}
+
+.node-image-popover .node-image-popover-button,
+.node-image-popover-button {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #fff;
+    padding: 6px 8px;
+    font-size: 11px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.node-image-popover .node-image-popover-button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.node-image-popover .node-image-popover-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Color Editor */
+/* Color Editor */
+.node-color-swatch {
+    width: 100%;
+    min-width: 50px;
+    height: 16px;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    font-family: monospace;
+    transition: transform 0.05s ease;
+}
+
+.node-color-swatch:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.node-color-swatch:active {
+    transform: scale(0.98);
+}
+
+.node-color-popover {
+    position: fixed;
+    /* Fixed positioning for Portal */
+    z-index: 9999;
+    background: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 180px;
+    user-select: none;
+}
+
+.node-color-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.node-color-label {
+    width: 28px;
+    font-size: 11px;
+    color: #aaa;
+}
+
+/* Custom Picker Internal Styles */
+.node-picker-sv {
+    width: 100%;
+    height: 150px;
+    position: relative;
+    cursor: crosshair;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.node-picker-sv-white {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #fff, transparent);
+}
+
+.node-picker-sv-black {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #000, transparent);
+}
+
+.node-picker-hue {
+    width: 100%;
+    height: 12px;
+    position: relative;
+    background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+    cursor: pointer;
+    border-radius: 6px;
+    margin-bottom: 4px;
+}
+
+.node-picker-handle {
+    width: 10px;
+    height: 10px;
+    border: 2px solid white;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.node-color-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.node-color-label {
+    width: 24px;
+    font-size: 10px;
+    color: #aaa;
+}
+
+.node-color-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    color: #fff;
+    padding: 2px 4px;
+    font-size: 10px;
+    font-family: monospace;
+    min-width: 0;
+}
+
+.node-color-input:focus {
+    outline: none;
+    border-color: #4a9eff;
+}
+
+.node-variable-editor-vec2 {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.node-variable-editor-vec2 input {
+    width: 28px;
+    text-align: center;
+    padding: 0 1px;
+    font-family: inherit;
+    font-size: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    color: #fff;
+    height: 12px;
+    line-height: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-variable-editor-vec2 input:focus {
+    outline: none;
+    border-color: #4a9eff;
+    background: rgba(74, 158, 255, 0.1);
+    z-index: 10;
+}
+
+/* Image uploader */
+.node-image-uploader {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.node-image-preview-label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-image-placeholder {
+    min-width: 44px;
+    min-height: 18px;
+    font-size: 9px;
+    color: #aaa;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    padding: 2px 6px;
+    box-sizing: border-box;
+}
+
+.node-image-preview {
+    max-width: 64px;
+    max-height: 40px;
+    object-fit: contain;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.node-image-clear {
+    appearance: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-image-clear:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Popover submenu for image actions */
+.node-image-popover {
+    position: fixed;
+    z-index: 10000;
+    background: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    padding: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    min-width: 120px;
+}
+
+.node-image-popover-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.node-image-popover-button {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #fff;
+    padding: 4px 6px;
+    font-size: 11px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.node-image-popover-button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.node-image-popover-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Photo container inside popover */
+.node-image-popover-photo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    min-height: 80px;
+    margin-bottom: 8px;
+}
+
+.node-image-popover-photo {
+    max-width: 240px;
+    max-height: 160px;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.node-image-popover-placeholder {
+    color: #999;
+    font-size: 12px;
+}
+
+.node-image-popover-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.node-image-popover-actions .node-image-popover-button {
+    flex: 1 1 50%;
+    text-align: center;
+}
+
+/* Boolean Editor */
+.node-variable-editor-boolean {
+    display: inline-flex;
+    align-items: center;
+}
+
+.node-boolean-pill {
+    min-width: 44px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: bold;
+    user-select: none;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.node-boolean-pill.active {
+    background: rgba(74, 158, 255, 0.15);
+    border-color: rgba(74, 158, 255, 0.4);
+}
+
+.node-boolean-text {
+    color: #888;
+    transition: color 0.2s ease;
+    font-family: monospace;
+    z-index: 1;
+}
+
+.node-boolean-pill.active .node-boolean-text {
+    color: #4a9eff;
+    margin-left: -12px;
+}
+
+.node-boolean-pill:not(.active) .node-boolean-text {
+    margin-right: -12px;
+}
+
+.node-boolean-switch {
+    width: 10px;
+    height: 10px;
+    background: #666;
+    border-radius: 5px;
+    position: absolute;
+    left: 3px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.node-boolean-pill.active .node-boolean-switch {
+    left: calc(100% - 13px);
+    background: #4a9eff;
+}
+
+.node-boolean-pill:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Color Editor Portal Helpers */
+.node-color-container {
+    position: relative;
+}
+
+.node-color-portal-container {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.node-color-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

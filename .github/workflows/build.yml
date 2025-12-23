@@ -1,0 +1,49 @@
+name: Build and attach release asset
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify dist files exist
+        run: |
+          for f in dist/index.css dist/index.d.ts dist/index.js; do
+            if [ ! -f "$f" ]; then
+              echo "Required file $f not found"
+              exit 1
+            fi
+          done
+
+      - name: Create zip with required files
+        run: zip -j release-package.zip dist/index.css dist/index.d.ts dist/index.js
+
+      - name: Upload zip to the release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./release-package.zip
+          asset_name: release-package.zip
+          asset_content_type: application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
