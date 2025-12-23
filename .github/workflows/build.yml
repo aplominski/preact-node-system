@@ -36,6 +36,18 @@ jobs:
 
       - name: Create zip with required files
         run: zip -j release-package.zip dist/index.css dist/index.d.ts dist/index.js
+      
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: node_system-${{ github.run_number }}
+          release_name: node_system-${{ github.run_number }}
+          body: "Automated release of preact node system"
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload zip to the release
         uses: actions/upload-release-asset@v1
